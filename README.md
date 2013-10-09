@@ -17,6 +17,7 @@ contest =
 .c = 10
 .cpp = 1
 .py = 7
+.cs = 29
 ```
 # Usage
 
