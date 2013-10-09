@@ -5,7 +5,9 @@
  * download tests for all problems from a given contest
  * submit solution to a problem from a given contest
 
-# Configuration File
+You will need Python 2.7 to run this script.
+
+# Configuration
 
 Create a file named `.cfrc` in the same directory as `cf.py` with the following contents:
 
