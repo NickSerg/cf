@@ -29,7 +29,7 @@ Fill in your handle, password and the contest name in `.cfrc`.
 ```
 
 This will create `a.1.in`, `a.2.in`,..., `e.1.in`,... with inputs
-and `a.1.ans`, `a.2.ans`,...,`e.1.ans`,... for answers.
+and `a.1.ans`, `a.2.ans`,...,`e.1.ans`,... with answers.
 
 ## Submit solution to a problem
 
