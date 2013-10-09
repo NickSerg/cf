@@ -42,4 +42,4 @@ and `a.1.ans`, `a.2.ans`,...,`e.1.ans`,... with answers.
 
 This will submit a solution to the problem *B* using GNU C++ as a compiler.
 
-Also supported `.py` for Python and `.c` for GNU C.
+Also supported `.py` for Python, `.c` for GNU C, and `.cs` for C#.
