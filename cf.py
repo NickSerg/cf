@@ -10,7 +10,7 @@ import os.path
 import ConfigParser
 
 def login(handle, password):
-    data = {}
+    data = dict()
     data['action'] = 'enter'
     data['handle'] = handle
     data['password'] = password
@@ -18,7 +18,7 @@ def login(handle, password):
     urllib2.urlopen('http://codeforces.ru/enter', encoded_data)
 
 def submit(contest, problem, language, solution):
-    data = {}
+    data = dict()
     data['action'] = 'submitSolutionFormSubmitted'
     data['submittedProblemIndex'] = problem
     data['programTypeId'] = language
@@ -32,7 +32,7 @@ def submit(contest, problem, language, solution):
     return match.groups(1)
 
 def check(submission):
-    data = {}
+    data = dict()
     data['submissionId'] = submission
     encoded_data = urllib.urlencode(data)
     response = urllib2.urlopen('http://codeforces.ru/data/submissionVerdict',
