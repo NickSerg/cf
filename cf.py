@@ -87,7 +87,7 @@ elif len(sys.argv) == 2:
 
     while True:
         submission_results = check(submission)
-        print submission_results
+        print submission_results['verdict'].encode('cp866')
         if submission_results['waiting'] == 'false':
             break
         time.sleep(1)
