@@ -66,7 +66,7 @@ def download(contest, problem):
 
 if len(sys.argv) > 2:
     print "Usage: cf.py or cf.py solution"
-elif len(sys.argv) == 2
+elif len(sys.argv) == 2:
     config_parser = ConfigParser.ConfigParser()
     config_parser.read('.cfrc')
 
