@@ -7,6 +7,7 @@ import time
 import urllib
 import urllib2
 import os.path
+import HTMLParser
 import ConfigParser
 
 def login(handle, password):
@@ -41,10 +42,12 @@ def check(submission):
     return submission_results
 
 def write(match, problem, case, extension):
+    parser = HTMLParser.HTMLParser()
     with open('{0}.{1}.{2}'.format(problem, case, extension), 'w') as f:
         str1 = match.group(1)
         str2 = str1.replace('<br />', '\n')
-        f.write(str2)
+        str3 = parser.unescape(str2)
+        f.write(str3)
 
 def download(contest, problem):
     url = 'http://codeforces.ru/contest/{0}/problem/{1}'.format(contest,
@@ -87,7 +90,7 @@ elif len(sys.argv) == 2:
 
     while True:
         submission_results = check(submission)
-        print submission_results['verdict'].encode('cp866')
+        print submission_results
         if submission_results['waiting'] == 'false':
             break
         time.sleep(1)
