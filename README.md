@@ -17,7 +17,7 @@ handle =
 password =
 contest =
 .c = 10
-.cpp = 1
+.cpp = 16
 .py = 7
 .cs = 29
 ```
