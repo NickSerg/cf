@@ -1,3 +1,4 @@
 .cfrc
 *.in
 *.ans
+*.out
