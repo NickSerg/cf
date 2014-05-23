@@ -7,6 +7,8 @@ import time
 import urllib
 import urllib2
 import os.path
+import filecmp
+import subprocess
 import HTMLParser
 import ConfigParser
 
@@ -43,15 +45,14 @@ def check(submission):
 
 def write(match, problem, case, extension):
     parser = HTMLParser.HTMLParser()
-    with open('{0}.{1}.{2}'.format(problem, case, extension), 'w') as f:
+    with open('{}.{}.{}'.format(problem, case, extension), 'w') as f:
         str1 = match.group(1)
         str2 = str1.replace('<br />', '\n')
         str3 = parser.unescape(str2)
         f.write(str3)
 
 def download(contest, problem):
-    url = 'http://codeforces.ru/contest/{0}/problem/{1}'.format(contest,
-        problem)
+    url = 'http://codeforces.ru/contest/{}/problem/{}'.format(contest, problem)
     response = urllib2.urlopen(url, problem)
     html = response.read()
     iter1 = re.finditer('<div class="input"><div class="title">.*?</div>'
@@ -64,11 +65,31 @@ def download(contest, problem):
         write(pair[0], problem, case, 'in')
         write(pair[1], problem, case, 'ans')
 
+def test(problem, solution):
+    case = 1
+    while os.path.exists('{}.{}.in'.format(problem, case)):
+        input = '{}.{}.in'.format(problem, case)
+        output = '{}.{}.out'.format(problem, case)
+        answer = '{}.{}.ans'.format(problem, case)
+        with open(input, 'r') as input_file:
+            with open(output, 'w') as output_file:
+                result = subprocess.call(solution,
+                    stdin = input_file, stdout = output_file)
+        if result != 0:
+            print 'Case {}: RE'
+        elif filecmp.cmp(output, answer):
+            print 'Case {}: OK'.format(case)
+        else:
+            print 'Case {}: WA'.format(case)
+        case += 1
 
 
 
-if len(sys.argv) > 2:
-    print "Usage: cf.py or cf.py solution"
+
+if len(sys.argv) > 3:
+    print 'Usage: cf.py or cf.py source or cf.py problem solution'
+elif len(sys.argv) == 3:
+    test(sys.argv[1], sys.argv[2])
 elif len(sys.argv) == 2:
     config_parser = ConfigParser.ConfigParser()
     config_parser.read('.cfrc')
@@ -100,4 +121,3 @@ elif len(sys.argv) == 1:
     contest = config_parser.get('cf', 'contest')
     for problem in ['a', 'b', 'c', 'd', 'e']:
         download(contest, problem)
-   
