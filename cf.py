@@ -28,7 +28,7 @@ def submit(contest, problem, language, solution):
     with open(solution) as f:
         data['source'] = f.read()
     encoded_data = urllib.urlencode(data)
-    url = 'http://codeforces.ru/contest/{0}/submit'.format(contest)
+    url = 'http://codeforces.ru/contest/{}/submit'.format(contest)
     response = urllib2.urlopen(url, encoded_data)
     html = response.read()
     match = re.search('data-submission-id="([0-9]*)"', html)
