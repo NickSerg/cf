@@ -51,4 +51,4 @@ Also supported `.py` for Python, `.c` for GNU C, and `.cs` for C#.
 ./cf.py a ./a
 ```
 
-This will run `./a` on all test cases for the problem `a`
+This will run `./a` on all test cases for the problem `a`.
