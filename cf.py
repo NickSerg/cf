@@ -71,6 +71,7 @@ def test(problem, solution):
         input = '{}.{}.in'.format(problem, case)
         output = '{}.{}.out'.format(problem, case)
         answer = '{}.{}.ans'.format(problem, case)
+        result = -1
         with open(input, 'r') as input_file:
             with open(output, 'w') as output_file:
                 result = subprocess.call(solution,
