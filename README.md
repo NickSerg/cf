@@ -17,6 +17,7 @@ Create a file named `.cfrc` in the same directory as `cf.py` with the following 
 handle =
 password =
 contest =
+fileSolution =
 .c = 10
 .cpp = 16
 .py = 7
@@ -24,7 +25,7 @@ contest =
 ```
 # Usage
 
-Fill in your handle, password and the contest name in `.cfrc`.
+Fill in your handle, password, the contest name and the file name with the solution for send in `.cfrc`.
 
 ## Download tests for all problems
 
