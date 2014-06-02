@@ -45,7 +45,7 @@ def check(submission):
 
 def write(match, problem, case, extension):
     parser = HTMLParser.HTMLParser()
-    with open('{}.{}.{}'.format(problem, case, extension), 'w') as f:
+    with open('tests/{}{}.{}'.format(problem, case, extension), 'w') as f:
         str1 = match.group(1)
         str2 = str1.replace('<br />', '\n')
         str3 = parser.unescape(str2)
