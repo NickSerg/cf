@@ -67,10 +67,10 @@ def download(contest, problem):
 
 def test(problem, solution):
     case = 1
-    while os.path.exists('{}.{}.in'.format(problem, case)):
-        input = '{}.{}.in'.format(problem, case)
-        output = '{}.{}.out'.format(problem, case)
-        answer = '{}.{}.ans'.format(problem, case)
+    while os.path.exists('tests/{}{}.in'.format(problem, case)):
+        input = 'tests/{}{}.in'.format(problem, case)
+        output = 'tests/{}{}.out'.format(problem, case)
+        answer = 'tests/{}{}.ans'.format(problem, case)
         result = -1
         with open(input, 'r') as input_file:
             with open(output, 'w') as output_file:
@@ -85,12 +85,10 @@ def test(problem, solution):
         case += 1
 
 
-
-
 if len(sys.argv) > 3:
     print 'Usage: cf.py or cf.py source or cf.py problem solution'
 elif len(sys.argv) == 3:
-    test(sys.argv[1], sys.argv[2])
+    test(sys.argv[1], 'bin\Debug\Codeforces.exe')
 elif len(sys.argv) == 2:
     config_parser = ConfigParser.ConfigParser()
     config_parser.read('.cfrc')
@@ -106,16 +104,21 @@ elif len(sys.argv) == 2:
 
     solution = sys.argv[1]
     contest = config_parser.get('cf', 'contest')
-    problem, extension = os.path.splitext(solution)
+    problem = solution
+    solution = config_parser.get('cf', 'fileSolution')
+    fileName, extension = os.path.splitext(solution)    
     language = config_parser.get('cf', extension)
     submission = submit(contest, problem, language, solution)
-
+    pattern = re.compile(r'(<.+?>|</.+?>)')
     while True:
         submission_results = check(submission)
-        print submission_results
         if submission_results['waiting'] == 'false':
             break
+        print pattern.sub('', submission_results['verdict'].encode('cp866'))
         time.sleep(1)
+        
+    print pattern.sub('', submission_results['verdict'].encode('cp866'))
+    
 elif len(sys.argv) == 1:
     config_parser = ConfigParser.ConfigParser()
     config_parser.read('.cfrc')
